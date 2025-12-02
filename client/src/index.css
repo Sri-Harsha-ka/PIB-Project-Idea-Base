@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@keyframes viewAniOpen {
+    0%{
+        transform: scaleY(0);
+    }
+    100%{
+        transform: scaleY(1);
+    }
+}
+@keyframes viewAniClose {
+    0%{
+        transform: scaleY(1);
+    }
+    100%{
+        transform: scaleY(0);
+        
+    }
+}
+
+@utility animate-viewAniOpen{
+    animation: viewAniOpen 0.2s ease-in 0ms 1 forwards;
+}
+@utility animate-viewAniClose{
+    animation: viewAniClose 0.2s ease-in 0ms 1 forwards;
+}
