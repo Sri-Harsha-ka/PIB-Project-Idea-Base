@@ -36,8 +36,13 @@ const projectCreation = async (req, res) => {
 }
 
 const projectReading = async (req, res) => {
-    const data = await projectModel.find();
-    res.json(data);
+    try {
+        const data = await projectModel.find();
+        res.json(data);
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: "Error Occured" })
+    }
 }
 
 const projectUpdation = async (req, res) => {
@@ -45,7 +50,7 @@ const projectUpdation = async (req, res) => {
         const prjId = req.params.prjId
         const { Name, Domain, Categorie, Rating, Relevance, Description } = req.body;
 
-        const prjUp = await projectModel.findByIdAndUpdate(prjId,{
+        const prjUp = await projectModel.findByIdAndUpdate(prjId, {
             Name,
             Domain,
             Categorie,
