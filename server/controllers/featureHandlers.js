@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const projectModel = require('../models/project')
 
 const featureCreation = async (req,res) =>{

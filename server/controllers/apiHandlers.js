@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
 const projectModel = require('../models/project')
 
-  // In Form - Project
-  // 1.Project Name
-  // 2.Project Domain
-  // 3.Categorie
-  // 4.Rating
-  // 5.Relevance
-  // 6.Description
+// In Form - Project
+// 1.Project Name
+// 2.Project Domain
+// 3.Categorie
+// 4.Rating
+// 5.Relevance
+// 6.Description
 
-  // For Features
+// For Features
 //   1.Feature Name
 //   2.Feature Description
 
-const projectCreation = async (req,res) =>{
-    
-    const {Name,Domain,Categorie,Rating,Relevance,Description} = req.body;
+const projectCreation = async (req, res) => {
 
-    try{
+    const { Name, Domain, Categorie, Rating, Relevance, Description } = req.body;
+
+    try {
         const data = await projectModel.create({
             Name,
             Domain,
@@ -29,35 +29,52 @@ const projectCreation = async (req,res) =>{
 
         res.status(201).send(`${Name} prj Has been Created`)
 
-    }catch(err){
+    } catch (err) {
         res.status(500).redirect('/error')
     }
 
 }
 
-const projectReading = async (req,res)=>{
-    res.json({message:"This is Reading of data"})
+const projectReading = async (req, res) => {
+    const data = await projectModel.find();
+    res.json(data);
 }
 
-const projectUpdation = async (req,res) =>{
-    res.json({message:"This is Updation"})
+const projectUpdation = async (req, res) => {
+    try {
+        const prjId = req.params.prjId
+        const { Name, Domain, Categorie, Rating, Relevance, Description } = req.body;
+
+        const prjUp = await projectModel.findByIdAndUpdate(prjId,{
+            Name,
+            Domain,
+            Categorie,
+            Rating,
+            Relevance,
+            Description
+        })
+
+        res.json({ "message": "Succuss" })
+    } catch (err) {
+        console.error(err)
+    }
 }
 
-const projectDeletion = async (req,res)=>{
-    try{
+const projectDeletion = async (req, res) => {
+    try {
         const prjId = req.params.prjId
         await projectModel.findByIdAndDelete(prjId)
 
-        res.json({message:"Project is deleted"})
-    }catch(err){
+        res.json({ message: "Project is deleted" })
+    } catch (err) {
         console.error(err)
-        return res.json({failed : "error occured"})
+        return res.json({ failed: "error occured" })
     }
 }
 
 module.exports = {
-    projectCreation , 
-    projectDeletion ,
-    projectReading ,
+    projectCreation,
+    projectDeletion,
+    projectReading,
     projectUpdation
 }
