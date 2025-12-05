@@ -20,8 +20,8 @@ const Create = () => {
   const [form, setForm] = useState({
     Name: '',
     Domain: '',
-    Rating: '',
-    Relevence: '',
+    Rating: 0,
+    Relevance: 0,
     Categorie: '',
     Description: ''
   })
@@ -42,8 +42,8 @@ const Create = () => {
     setForm({
       Name: '',
       Domain: '',
-      Rating: '',
-      Relevence: '',
+      Rating: 0,
+      Relevance: 0,
       Categorie: '',
       Description: ''
     })
@@ -70,7 +70,7 @@ const Create = () => {
           </div>
           <div className='flex justify-center items-center gap-8 pt-8'>
             <span className='font-semibold text-xl'>Relevance Level out of 10: </span>
-            <input type="number" name='Relevence' onChange={onChange} value={form.Relevence} max={10} min={0} className='px-4 py-2 w-20 outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border-b-2 border-[#697565]' />
+            <input type="number" name='Relevance' onChange={onChange} value={form.Relevance} max={10} min={0} className='px-4 py-2 w-20 outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border-b-2 border-[#697565]' />
           </div>
 
           <div className='flex justify-center items-center gap-8 pt-8 pb-8' >

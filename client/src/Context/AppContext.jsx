@@ -28,20 +28,21 @@ export const AppProvider = ({ children }) => {
 
     const createPrj = async (data) => {
         await axios.post(`${baseURL}/create`, data)
-        toast.success("Created a Project" , {style:{background:"#3C3D37"}})
         loadPrj()
+        toast.success("Created a Project" , {style:{background:"#3C3D37"}})
     }
 
-    const updatePrj = async (data, id) => {
-        await axios.post(`${baseURL}/update/project/${id}`, data)
-        loadPrj()
+    const updatePrj = async (data, prjId) => {
+        await axios.post(`${baseURL}/update/project/${prjId}`, data)
+        loadPrjOne(prjId)
+        toast.success("Updated a Project", {style:{background:"#3C3D37"}})
     }
 
     const delPrj = async (prjId)=>{
         await axios.post(`${baseURL}/delete/project/${prjId}`)
         navigate('/')
         loadPrj()
-        toast.success("Deleted a Feature", {style:{background:"#3C3D37"}})
+        toast.success("Deleted a Project", {style:{background:"#3C3D37"}})
     }
 
     const createFeature = async (data, prjId) => {
@@ -82,7 +83,8 @@ export const AppProvider = ({ children }) => {
             setFet,
             loadFeature,
             deleteFeature,
-            delPrj
+            delPrj,
+            updatePrj
         }}>
             {children}
         </AppContext.Provider>

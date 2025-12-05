@@ -4,17 +4,18 @@ import { useApp } from '../Context/AppContext'
 import Features from '../components/Features'
 import FeatureAdd from '../components/FeatureAdd'
 import DeletePrj from '../components/DeletePrj'
+import UpdatePrj from '../components/UpdatePrj'
 
 const Project = () => {
 
     const prjId = useParams().prjId
     const { loadPrjOne, loaded, fet, loadFeature, delPrj } = useApp()
     const [del, setDel] = useState("notActive");
+    const [upD, setUpD] = useState("notActive");
 
     useEffect(() => {
         loadPrjOne(prjId)
         loadFeature(prjId);
-        console.log(loaded);
     }, [])
 
     const onDelPrj = (e) => {
@@ -26,7 +27,8 @@ const Project = () => {
         <>
             <div className='z-40 ' /> 
             {del === "Active" && <DeletePrj setDel={setDel} onDelPrj={onDelPrj} />}
-            <div className={`bg-[#1E201E] px-10 py-10 min-h-screen ${del === 'Active' ? "blur-lg" : ""}`}>
+            {upD === "Active" && <UpdatePrj prjId={prjId} setUpD = {setUpD} />}
+            <div className={`bg-[#1E201E] px-10 py-10 min-h-screen ${del === 'Active' || upD==='Active' ? "blur-lg" : ""}`}>
 
 
                 <div className='head '>
@@ -37,7 +39,7 @@ const Project = () => {
                         </p>
                         <div>
                             <div className='flex gap-5'>
-                                <div className='text-lg bg-emerald-600 px-4 py-2 rounded-xl transition-all cursor-pointer'>
+                                <div onClick={() => setUpD("Active")} className='text-lg bg-emerald-600 px-4 py-2 rounded-xl transition-all cursor-pointer'>
                                     edit
                                 </div>
                                 <div onClick={() => setDel("Active")} className='text-lg bg-red-400 px-4 py-2 rounded-xl transition-all cursor-pointer'>
@@ -71,8 +73,8 @@ const Project = () => {
                     <hr className='mt-6 border-[#697565]' />
                 </div>
 
-                <div className='features'>
-                    <div className='px-10 py-8 grid grid-rows-4 grid-cols-3 gap-y-10 gap-x-5'>
+                <div className='features min-h-96'>
+                    <div className='px-10 py-8 grid grid-cols-3 gap-y-10 gap-x-5'>
                         {
                             fet.map((f) => {
                                 return <Features key={f._id} fetId={f._id} prjId={prjId} name={f.FName} des={f.FDescription} />
@@ -80,6 +82,14 @@ const Project = () => {
                         }
                         <FeatureAdd prjId={prjId} />
                     </div>
+                </div>
+
+                 <div className='hr'>
+                    <hr className='mt-6 border-[#697565]' />
+                </div>
+
+                <div>
+                    <p>{loaded.Description}</p>
                 </div>
 
 
