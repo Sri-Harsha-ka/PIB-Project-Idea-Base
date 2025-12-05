@@ -65,5 +65,5 @@ It’s a personal space made for myself.
 ## 🔗 Project Links
 
 - **GitHub Repo:** https://github.com/Sri-Harsha-ka/PIB-Project-Idea-Base  
-- **Live Demo:** *(Add your deployed frontend URL here)*
+- **Live Demo:** *https://pib-project-idea-base-jx4syqozp-sri-harsha-kas-projects.vercel.app/*
 
