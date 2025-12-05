@@ -53,8 +53,13 @@ export const AppProvider = ({ children }) => {
 
     const loadFeature = async (prjId) => {
         const res = await axios.get(`${baseURL}/read/${prjId}`)
-        console.log(res.data);
         setFet(res.data)
+    }
+
+    const updateFeature = async (prjId,data,fetId)=>{
+        await axios.post(`${baseURL}/update/feature/${prjId}/${fetId}`,data)
+        loadFeature(prjId)
+        toast.success("Updated a Feature" , {style:{background:"#3C3D37"}})
     }
 
     const deleteFeature = async (prjId, fetId) => {
@@ -84,7 +89,8 @@ export const AppProvider = ({ children }) => {
             loadFeature,
             deleteFeature,
             delPrj,
-            updatePrj
+            updatePrj,
+            updateFeature
         }}>
             {children}
         </AppContext.Provider>
