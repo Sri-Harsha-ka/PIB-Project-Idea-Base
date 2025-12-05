@@ -7,7 +7,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
-    const baseURL = 'http://localhost:3000/api'
+    const baseURL = import.meta.env.VITE_API_BASE || 'http://localhost:3000/api'
 
     const navigate = useNavigate()
     const [view, setView] = useState(false)
