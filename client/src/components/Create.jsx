@@ -5,7 +5,7 @@ import bg from '../images/image.png'
 
 const Create = () => {
 
-  const { view, ani , createPrj , prj, setPrj } = useApp()
+  const { view,ani , setAni, createPrj, prj, setPrj } = useApp()
 
   const animationClass = ani === false ? "animate-viewAniClose" : "animate-viewAniOpen"
 
@@ -17,11 +17,11 @@ const Create = () => {
   // 5.Relevance
   // 6.Description
 
-  const [form,setForm] = useState({
-    Name :'',
-    Domain:'',
-    Rating:'',
-    Relevence:'',
+  const [form, setForm] = useState({
+    Name: '',
+    Domain: '',
+    Rating: '',
+    Relevence: '',
     Categorie: '',
     Description: ''
   })
@@ -35,9 +35,20 @@ const Create = () => {
     }))
   }
 
-  const onSubmit = async(e) =>{
+  const onSubmit = async (e) => {
     e.preventDefault()
     await createPrj(form)
+
+    setForm({
+      Name: '',
+      Domain: '',
+      Rating: '',
+      Relevence: '',
+      Categorie: '',
+      Description: ''
+    })
+
+    setAni(false)
   }
 
 
@@ -48,9 +59,9 @@ const Create = () => {
           <p className='font-mono text-3xl'>Project Creation</p>
         </div>
         <form onSubmit={onSubmit} className='px-20 py-12 flex justify-center items-center flex-col'>
-          <input type="text" name='Name' value={form.Name} onChange={onChange}  placeholder='Enter the Project Name' className='outline-none border-b-2 w-96 px-7 py-2 text-xl font-semibold focus:border-b-[#697565]' />
+          <input type="text" name='Name' value={form.Name} onChange={onChange} placeholder='Enter the Project Name' className='outline-none border-b-2 w-96 px-7 py-2 text-xl font-semibold focus:border-b-[#697565]' />
           <div className='flex justify-center items-center gap-8 pt-8 flex-col'>
-            <input type="text" name='Domain' value={form.Domain} onChange={onChange}  placeholder='Enter the Domain' className='outline-none border-b-2 w-96 px-7 py-2 text-xl font-semibold focus:border-b-[#697565]' />
+            <input type="text" name='Domain' value={form.Domain} onChange={onChange} placeholder='Enter the Domain' className='outline-none border-b-2 w-96 px-7 py-2 text-xl font-semibold focus:border-b-[#697565]' />
             <input type="text" name='Categorie' value={form.Categorie} onChange={onChange} placeholder='Enter the Categorie' className='outline-none border-b-2 w-96 px-7 py-2 text-xl font-semibold focus:border-b-[#697565]' />
           </div>
           <div className='flex justify-center items-center gap-8 pt-8'>

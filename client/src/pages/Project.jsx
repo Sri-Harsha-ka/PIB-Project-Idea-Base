@@ -1,65 +1,90 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { data, useParams } from 'react-router-dom'
 import { useApp } from '../Context/AppContext'
 import Features from '../components/Features'
 import FeatureAdd from '../components/FeatureAdd'
+import DeletePrj from '../components/DeletePrj'
 
 const Project = () => {
 
     const prjId = useParams().prjId
-    const { loadPrjOne, loaded } = useApp()
+    const { loadPrjOne, loaded, fet, loadFeature, delPrj } = useApp()
+    const [del, setDel] = useState("notActive");
 
     useEffect(() => {
-        loadPrjOne(prjId);
-        console.log();
-        
+        loadPrjOne(prjId)
+        loadFeature(prjId);
+        console.log(loaded);
     }, [])
 
+    const onDelPrj = (e) => {
+        e.preventDefault();
+        delPrj(prjId)
+    }
 
     return (
+        <>
+            <div className='z-40 ' /> 
+            {del === "Active" && <DeletePrj setDel={setDel} onDelPrj={onDelPrj} />}
+            <div className={`bg-[#1E201E] px-10 py-10 min-h-screen ${del === 'Active' ? "blur-lg" : ""}`}>
 
-        <div className='bg-[#1E201E] px-10 py-5'>
 
-            <div className='head '>
-                <p className='text-6xl font-mono tracking-wider text-[#ECDFCC]'>
-                    {loaded.Name}
-                </p>
-                <div className='px-10 py-5'>
-                    <div className='flex justify-between gap-10 w-[30%]'>
-                        <div className='flex justify-evenly gap-4 items-center'>
-                            <span className='text-xl font-bold'>Domain:</span> <span className='text-xl font-sans'>{loaded.Domain}</span>
-                        </div>
-                        <div className='flex justify-evenly gap-4'>
-                            <span className='text-xl font-bold'>Categorie:</span> <span className='text-xl font-sans'>{loaded.Categorie}</span>
+                <div className='head '>
+
+                    <div className='flex justify-between'>
+                        <p className='text-6xl font-mono tracking-wider text-[#ECDFCC]'>
+                            {loaded.Name}
+                        </p>
+                        <div>
+                            <div className='flex gap-5'>
+                                <div className='text-lg bg-emerald-600 px-4 py-2 rounded-xl transition-all cursor-pointer'>
+                                    edit
+                                </div>
+                                <div onClick={() => setDel("Active")} className='text-lg bg-red-400 px-4 py-2 rounded-xl transition-all cursor-pointer'>
+                                    delete
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className='flex justify-between gap-10 w-[30%] pt-5'>
-                        <div className='flex justify-evenly gap-4 items-center'>
-                            <span className='text-xl font-bold'>Rating:</span> <span className='text-xl font-sans'>{loaded.Rating}/10</span>
+
+                    <div className='px-10 py-5'>
+                        <div className='flex justify-between gap-10 w-[30%]'>
+                            <div className='flex justify-evenly gap-4 items-center'>
+                                <span className='text-xl font-bold'>Domain:</span> <span className='text-xl font-sans'>{loaded.Domain}</span>
+                            </div>
+                            <div className='flex justify-evenly gap-4'>
+                                <span className='text-xl font-bold'>Categorie:</span> <span className='text-xl font-sans'>{loaded.Categorie}</span>
+                            </div>
                         </div>
-                        <div className='flex justify-evenly gap-4'>
-                            <span className='text-xl font-bold'>Relevance:</span> <span className='text-xl font-sans'>{loaded.Relevance}/10</span>
+                        <div className='flex justify-between gap-10 w-[30%] pt-5'>
+                            <div className='flex justify-evenly gap-4 items-center'>
+                                <span className='text-xl font-bold'>Rating:</span> <span className='text-xl font-sans'>{loaded.Rating}/10</span>
+                            </div>
+                            <div className='flex justify-evenly gap-4'>
+                                <span className='text-xl font-bold'>Relevance:</span> <span className='text-xl font-sans'>{loaded.Relevance}/10</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hr'>
-                <hr className='mt-6 border-[#697565]' />
-            </div>
-
-            <div className='features'>
-                <div className='px-10 py-8 grid grid-rows-4 grid-cols-3 gap-y-10 gap-x-5'>
-                    <Features/>
-                    <Features/>
-                    <Features/>
-                    <Features/>
-                    <FeatureAdd />
+                <div className='hr'>
+                    <hr className='mt-6 border-[#697565]' />
                 </div>
+
+                <div className='features'>
+                    <div className='px-10 py-8 grid grid-rows-4 grid-cols-3 gap-y-10 gap-x-5'>
+                        {
+                            fet.map((f) => {
+                                return <Features key={f._id} fetId={f._id} prjId={prjId} name={f.FName} des={f.FDescription} />
+                            })
+                        }
+                        <FeatureAdd prjId={prjId} />
+                    </div>
+                </div>
+
+
             </div>
-
-
-        </div>
+        </>
     )
 }
 
