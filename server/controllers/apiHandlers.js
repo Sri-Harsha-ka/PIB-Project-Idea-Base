@@ -77,9 +77,20 @@ const projectDeletion = async (req, res) => {
     }
 }
 
+const projectReadOne = async (req,res) => {
+    try{
+        const prjId = req.params.prjId
+        const data = await projectModel.findById(prjId)
+        res.json(data);
+    }catch(err){
+        res.status(500).json({message:'Error Occured'})
+    }
+}
+
 module.exports = {
     projectCreation,
     projectDeletion,
     projectReading,
-    projectUpdation
+    projectUpdation,
+    projectReadOne,
 }

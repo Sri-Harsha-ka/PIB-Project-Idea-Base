@@ -16,6 +16,7 @@ route.post('/create',apiHandler.projectCreation)
 route.get('/read',apiHandler.projectReading)
 route.post('/update/project/:prjId',apiHandler.projectUpdation)
 route.post('/delete/project/:prjId',apiHandler.projectDeletion)
+route.get('/readone/project/:prjId' , apiHandler.projectReadOne);
 
 // Routes of features ( CURD Op)
 route.post('/create/:prjId' , featureHandler.featureCreation)

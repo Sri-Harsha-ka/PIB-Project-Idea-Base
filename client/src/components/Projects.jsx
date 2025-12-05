@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Project = (p) => {
+const Projects = (p) => {
   return (
-    <div className='cursor-pointer'>
+    <Link to={`/project/${p.id}`}><div className='cursor-pointer'>
       <div className='px-8 py-6 bg-[#3C3D37] w-96 h-56 rounded-md hover:shadow-2xl shadow-[#242723] transition-all'>
         <div className='flex justify-center text-center'>
           <p className='font-mono text-2xl'>{p.Name}</p>
@@ -20,7 +21,8 @@ const Project = (p) => {
         </div>
       </div>
     </div>
+    </Link>
   )
 }
 
-export default Project
+export default Projects

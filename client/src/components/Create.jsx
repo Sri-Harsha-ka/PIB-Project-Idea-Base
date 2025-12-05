@@ -35,8 +35,9 @@ const Create = () => {
     }))
   }
 
-  const onSubmit = () =>{
-    createPrj(form)
+  const onSubmit = async(e) =>{
+    e.preventDefault()
+    await createPrj(form)
   }
 
 

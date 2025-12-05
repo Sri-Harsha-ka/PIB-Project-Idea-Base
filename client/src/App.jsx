@@ -5,6 +5,8 @@ import {useApp} from "./Context/AppContext"
 import Nav from "./pages/Nav"
 import Home from "./pages/Home"
 import Create from "./components/Create"
+import { ToastContainer } from "react-toastify"
+import Project from "./pages/Project"
 
 
 function App() {
@@ -23,10 +25,14 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#1E201E] min-h-screen text-[#ECDFCC]">
+      <div className="bg-[#1E201E] min-h-screen text-[#ECDFCC] selection:bg-red-500">
         <Nav />
         {view===true && <Create />}
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home/>}></Route>
+          <Route path="/project/:prjId" element={<Project/>}></Route>
+        </Routes>
+        <ToastContainer position="bottom-right" />
       </div>
     </>
   )
