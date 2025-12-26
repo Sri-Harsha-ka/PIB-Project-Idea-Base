@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef, createContext, Children, useEffect
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const AppContext = createContext();
 
@@ -15,10 +16,20 @@ export const AppProvider = ({ children }) => {
     const [prj, setPrj] = useState([])
     const [loaded, setLoaded] = useState({})
     const [fet, setFet] = useState([])
+    const [loadingPrj , setLoadingPrj] = useState(false)
 
     const loadPrj = async () => {
-        const res = await axios.get(`${baseURL}/read`)
-        setPrj(res.data)
+        try{
+            setLoadingPrj(true);
+            const res = await axios.get(`${baseURL}/read`)
+            console.log(loadingPrj)
+            setPrj(res.data)
+        }catch(err){
+            console.error(err);
+        }finally{
+            setLoadingPrj(false)
+            console.log(loadingPrj)
+        }
     }
 
     const loadPrjOne = async (prjId) => {
@@ -90,7 +101,8 @@ export const AppProvider = ({ children }) => {
             deleteFeature,
             delPrj,
             updatePrj,
-            updateFeature
+            updateFeature,
+            loadingPrj,
         }}>
             {children}
         </AppContext.Provider>
