@@ -53,7 +53,7 @@ const Create = () => {
 
 
   return (
-    <div className={`${animationClass} w-[50vw] h-[42vw] bg-[#33332f] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-linear rounded-lg bg-cover overflow-hidden`} /* style={{ backgroundImage: `url(${bg})`, backgroundRepeat: `no-repeat` }} */>
+    <div className={`${animationClass} w-[50vw] h-[42vw] bg-[#33332f] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all ease-linear rounded-lg bg-cover overflow-hidden z-90`} /* style={{ backgroundImage: `url(${bg})`, backgroundRepeat: `no-repeat` }} */>
       <div className='backdrop-blur-xl px-10 py-7'>
         <div className='flex justify-center text-center'>
           <p className='font-mono text-3xl'>Project Creation</p>
