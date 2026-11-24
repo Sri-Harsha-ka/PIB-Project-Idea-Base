@@ -22,8 +22,6 @@ I often get random ideas for projects or features, but I forget them later — s
 
 ---
 
-you good vro ? 
-yaa I think ? 
 
 ## 🛠 Tech Stack
 
